@@ -2,7 +2,9 @@ name: Code quality
 
 on:
   push:
+    branches: [ main, develop ]
   pull_request:
+    branches: [ main, develop ]
 
 jobs:
   quality:
@@ -10,9 +12,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Cache Biome
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.biome
+            ~/.cache/biome
+          key: ${{ runner.os }}-biome-${{ hashFiles('**/biome.json') }}
+          restore-keys: |
+            ${{ runner.os }}-biome-
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:
-          version: latest
+          version: 1.9.2
       - name: Run Biome
         run: biome ci .

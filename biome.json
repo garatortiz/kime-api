@@ -1,10 +1,16 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
-  "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": false,
     "include": ["src/**/*.ts", "test/**/*.ts"],
-    "ignore": ["dist", "node_modules", "**/*.min.js", "**/*.js"]
+    "ignore": [
+      "dist",
+      "node_modules",
+      "**/*.min.js",
+      "src/**/*.js",
+      "test/**/*.js"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -21,7 +27,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": false,
+      "recommended": true,
       "complexity": {
         "noBannedTypes": "error",
         "noUselessThisAlias": "error",
@@ -39,7 +45,7 @@
         "useBlockStatements": "off"
       },
       "suspicious": {
-        "noExplicitAny": "off",
+        "noExplicitAny": "error",
         "noExtraNonNullAssertion": "error",
         "noMisleadingInstantiator": "error",
         "noUnsafeDeclarationMerging": "error"
@@ -52,7 +58,7 @@
       "jsxQuoteStyle": "double",
       "quoteProperties": "asNeeded",
       "trailingCommas": "all",
-      "semicolons": "asNeeded",
+      "semicolons": "always",
       "arrowParentheses": "always",
       "bracketSameLine": false,
       "quoteStyle": "single",
@@ -66,13 +72,13 @@
       "linter": {
         "rules": {
           "correctness": {
-            "noConstAssign": "off",
+            "noConstAssign": "error",
             "noGlobalObjectCalls": "off",
             "noInvalidConstructorSuper": "off",
             "noNewSymbol": "off",
             "noSetterReturn": "off",
             "noUndeclaredVariables": "off",
-            "noUnreachable": "off",
+            "noUnreachable": "error",
             "noUnreachableSuper": "off"
           },
           "style": {
