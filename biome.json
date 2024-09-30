@@ -84,7 +84,8 @@
           "style": {
             "noArguments": "error",
             "noVar": "error",
-            "useConst": "error"
+            "useConst": "error",
+            "useImportType": "off"
           },
           "suspicious": {
             "noDuplicateClassMembers": "off",
