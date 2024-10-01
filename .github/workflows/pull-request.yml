@@ -8,10 +8,13 @@ on:
 
 jobs:
   quality:
+    name: quality
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Cache Biome
         uses: actions/cache@v3
         with:
@@ -21,9 +24,36 @@ jobs:
           key: ${{ runner.os }}-biome-${{ hashFiles('**/biome.json') }}
           restore-keys: |
             ${{ runner.os }}-biome-
+
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
         with:
           version: 1.9.2
+
       - name: Run Biome
         run: biome ci .
+
+  testing:
+    name: testing
+    needs: quality
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Tests
+        run: npm test
+        working-directory: ${{ github.workspace }}
+      
