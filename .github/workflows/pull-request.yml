@@ -33,8 +33,8 @@ jobs:
       - name: Run Biome
         run: biome ci .
 
-  testing:
-    name: testing
+  test:
+    name: test
     needs: quality
     runs-on: ubuntu-latest
     strategy:
@@ -56,4 +56,5 @@ jobs:
       - name: Run Tests
         run: npm test
         working-directory: ${{ github.workspace }}
+      
       
