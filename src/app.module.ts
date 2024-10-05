@@ -18,7 +18,7 @@ import configurations from './config/configurations';
         PORT: Joi.number().port().default(3000),
       }),
       validationOptions: {
-        allowUnknows: false,
+        allowUnknown: false,
         abortEarly: true,
       },
       expandVariables: true,
