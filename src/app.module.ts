@@ -17,10 +17,6 @@ import configurations from './config/configurations';
           .default('development'),
         PORT: Joi.number().port().default(3000),
       }),
-      validationOptions: {
-        allowUnknown: false,
-        abortEarly: true,
-      },
       expandVariables: true,
     }),
   ],
