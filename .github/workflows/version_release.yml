@@ -29,6 +29,12 @@ jobs:
             echo "GIT_COMMITTER_NAME=${{ vars.GIT_COMMITTER_NAME }}"
             echo "GIT_COMMITTER_EMAIL=${{ vars.GIT_COMMITTER_EMAIL }}"
           } >> $GITHUB_ENV
+
+      - name: Fetch latest commit
+        run: |
+          git fetch
+          git reset --hard origin/main
+
       - name: Print package.json version (before)
         run: |
           echo "package.json version (before): $(jq -r .version package.json)"
@@ -36,10 +42,6 @@ jobs:
       - name: Run semantic release
         run: npx semantic-release
       
-      - name: Fetch latest commit
-        run: |
-          git fetch
-          git reset --hard origin/main
-      
       - name: Print package.json version (after)
-        run: echo "package.json version (before): $(jq -r .version package.json)"
+        run: |
+          echo "package.json version (before): $(jq -r .version package.json)"
